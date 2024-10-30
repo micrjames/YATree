@@ -1,4 +1,5 @@
 import { YATree } from "../YATree";
+import { Node } from "../NodeCollection/Node";
 
 describe("A YATree", () => {
    let tree: YATree<number>;
@@ -6,21 +7,31 @@ describe("A YATree", () => {
 	  tree = new YATree();
    });
    describe("Created", () => {
-	  test.todo("Should exist.");
-	  test.todo("Should have a single node.");
-	  test.todo("Should only exist as the 'root node'.");
-	  test.todo("Should have a 'level' of 1.");
-	  test.todo("Should have a 'height' of 1.");
+	  let treeRoot: Node<number>;
+	  let height: number;
+	  let level: number;
+	  beforeAll(() => {
+		 treeRoot = tree.root;
+		 height = tree.height;
+		 level = tree.level;
+	  });
+	  describe("With no nodes", () => {
+		 test("Should exist.", () => {
+			expect(tree).toBeDefined();
+		 });
+		 test("Should have no nodes.", () => {
+			expect(treeRoot).toBeNull();
+		 });
+		 test("Should have no Key value.", () => {
+			const nodeKey = treeRoot?.Key;
+			expect(nodeKey).toBeUndefined();
+		 });
+		 test("Should have a 'level' of 0.", () => {
+			expect(level).toBe(0);
+		 });
+		 test("Should have a 'height' of 0.", () => {
+			expect(height).toBe(0);
+		 });
+	  });
    });
 });
-/*
-	let rootNode = new Node<string>(‘Root’);
-	let child1 = new Node<string>(‘Child 1’);
-	let child2 = new Node<string>(‘Child 2’);
-	let subChild = new Node<string>(‘Sub Child’);
-
-	// Add child nodes
-	rootNode.addChild(child1);
-	rootNode.addChild(child2);
-	child1.addChild(subChild);
-*/
