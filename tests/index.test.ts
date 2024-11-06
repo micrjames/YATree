@@ -52,10 +52,10 @@ describe("A YATree", () => {
 			   height = tree.height;
 			   level = tree.level;
 
-			   const rootFirstChild = treeRoot.children.next().value;
+			   const rootChild = treeRoot.children.next().value;
 			   do {
 				  nLevel++;
-			   } while(rootFirstChild);
+			   } while(rootChild);
 			});
 			test("Should exist.", () => {
 			   expect(tree).toBeDefined();
@@ -79,24 +79,36 @@ describe("A YATree", () => {
 			let tree: YATree<number>;
 			let treeRoot: Node<number>;
 			let treeRootChildren: NodeCollection<number>;
+			let treeRootFirstChild: Node<number>;
+			let treeRootLastChild: Node<number>;
 			let treeRootChildrenKeys: number[];
+			let treeRootChildCollection: NodeCollection<number>;
+			let treeRootChildrenKey2: number;
+			let treeRootChildrenKey3: number;
 			let treeRootChildrenKeysSize: number;
 			let treeRootChildrenSize: number;
 			let height: number;
 			let level: number;
 			beforeAll(() => {
 			   nodeKeyValue = 1;
-			   treeRootChildrenKeys = [2, 3];
+			   treeRootChildrenKey2 = 2
+			   treeRootChildrenKey3 = 3;
+			   treeRootChildrenKeys = [treeRootChildrenKey2, treeRootChildrenKey3];
 			   treeRootChildrenKeysSize = treeRootChildrenKeys.length;
+			   treeRootChildCollection = new NodeCollection(new Node(treeRootChildrenKeys[0]),
+															new Node(treeRootChildrenKeys[1]));
 			   tree = new YATree(new Node(nodeKeyValue,
-										  new Node(treeRootChildrenKeys[0]),
-			   							  new Node(treeRootChildrenKeys[1])
+										  treeRootChildCollection.item(0),
+										  treeRootChildCollection.item(1)
 								));
 			   treeRoot = tree.root;
 			   treeRootChildren = treeRoot.children;
 			   treeRootChildrenSize = treeRootChildren.size;
 			   height = tree.height;
 			   level = tree.level;
+			   nLevel++;nHeight++;
+			   treeRootFirstChild = treeRootChildren.next().value;
+			   treeRootLastChild = treeRootChildren.next().value;
 			});
 			test("Should have children.", () => {
 			   expect(treeRootChildren).toBeDefined();
@@ -104,12 +116,30 @@ describe("A YATree", () => {
 			test(`Should have ${treeRootChildrenKeysSize} children.`, () => {
 			   expect(treeRootChildrenSize).toBe(treeRootChildrenKeysSize);
 			});
-			test.todo(`Should have ${treeRootChildrenKeys[0]} as the key of the first child node.`);
-			test.todo(`Should have ${treeRootChildrenKeys[1]} as the key of the second/last child node.`);
-			test.todo("Should have the children at the level of one more than at the root node.");
-			test.todo("Should have ${treeRootChildrenKeys[0]} as the first child sibling at that level.");
-			test.todo("Should have ${treeRootChildrenKeys[1]} as the second/last child sibling at that level.");
-			test.todo("Should have height of one more than at the root node");
+			test(`Should have ${treeRootChildrenKey2} as the key of the first child node.`, () => {
+			   const treeRootFirstChildKey = treeRootFirstChild.Key;
+			   expect(treeRootFirstChildKey).toBe(treeRootChildrenKey2);
+			});
+			test(`Should have ${treeRootChildrenKey3} as the key of the second/last child node.`, () => {
+			   const treeRootLastChildKey = treeRootLastChild.Key;
+			   expect(treeRootLastChildKey).toBe(treeRootChildrenKey3);
+			});
+			test("Should have the children at the level of one more than at the root node.", () => {
+			   const childLevel = level + 1;
+			   expect(childLevel).toBe(nLevel);
+			});
+			test("Should have ${treeRootFirstChild} as the first child sibling at that level.", () => {
+			   const firstChild = treeRootChildCollection.next().value;
+			   expect(treeRootFirstChild).toEqual(firstChild);
+			});
+			test("Should have ${treeRootLastChild} as the second/last child sibling at that level.", () => {
+			   const lastChild = treeRootChildCollection.next().value;
+			   expect(treeRootLastChild).toEqual(lastChild);
+			});
+			test("Should have height of one more than at the root node", () => {
+			   const childHeight = height + 1;
+			   expect(childHeight).toBe(nHeight);
+			});
 		 });
 	  });
    });
