@@ -2,27 +2,25 @@ import { Node } from "./NodeCollection/Node";
 
 export class YATree<T> {
    private _root: Node<T> | null;
-   private _height: number;
-   private _level: number;
    // leaf: node with no children.
 
-   constructor() {
-	  this._root = null;
-	  this._height = 0;
-	  this._level = 0;
+   constructor(rootNode: Node<T> | null = null) {
+	  this._root = rootNode;
    }
 
    // height: maximum depth of subtree node and farthest leaf
    get height(): number {
-	  if(!this._root) return 0
+	  if(!this._root) return 0;
+	  return 0;
    }
 
    // level: 1 + num edges between root and node.
    get level(): number {
-	  if(!this._root) return 0
+	  if(!this._root) return 0;
+	  return 1;
    }
 
-   get root(): Node<T> {
+   get root(): Node<T> | null {
 	  return this._root;
    }
 }
