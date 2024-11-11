@@ -1,4 +1,5 @@
 import { Node } from "./NodeCollection/Node";
+import { YAQ } from "./YAQ/YAQ";
 
 export class YATree<T> {
    private _root: Node<T> | null;
@@ -6,6 +7,14 @@ export class YATree<T> {
 
    constructor(rootNode: Node<T> | null = null) {
 	  this._root = rootNode;
+   }
+
+   traverseTo(node: Node<T> = null) {
+	  const q = new YAQ<Node<T>>();
+	  q.enqueue(this.root);
+	  while(!q.is_empty) {
+		 const front_node = q.dequeue();
+	  }
    }
 
    // height: maximum depth of subtree node and farthest leaf

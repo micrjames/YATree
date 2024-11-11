@@ -1,6 +1,6 @@
 import { YATree } from "../YATree";
 import { Node } from "../NodeCollection/Node";
-import {NodeCollection} from "../NodeCollection/NodeCollection";
+import { NodeCollection } from "../NodeCollection/NodeCollection";
 
 describe("A YATree", () => {
    describe("Created", () => {
@@ -56,6 +56,8 @@ describe("A YATree", () => {
 			   do {
 				  nLevel++;
 			   } while(rootChild);
+
+			   tree.traverseTo();
 			});
 			test("Should exist.", () => {
 			   expect(tree).toBeDefined();
