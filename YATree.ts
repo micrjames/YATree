@@ -10,28 +10,31 @@ export class YATree<T> {
 	  this._level = 0;
    }
 
-   traverseTo(node: Node<T> | null): Node<T> | null { 
+   traverseTo(node: Node<T>): Node<T> | null {
 	  let front_node: Node<T> | null;
 	  const q = new YAQ<Node<T>>();
 	  q.enqueue(this._root);
-	  while(!q.is_empty && front_node?.Key !== node?.Key) {
+	  while(!q.is_empty) {
 		 front_node = q.dequeue();
+		 if(front_node?.Key === node?.Key) return front_node;
 		 let front_node_children = front_node.children;
 		 let front_node_children_size = front_node_children.size;
 		 if(front_node_children_size > 0) {
 			let front_node_child = front_node_children.next();
 			this._level++;
+			console.log(this._level);
 			while(!front_node_child.done) {
 			   q.enqueue(front_node_child.value);
 			   front_node_child = front_node_children.next();
 			}
 		 }
 	  }
-	  return front_node;
+	  return null;
    }
 
    // height: maximum depth of subtree node and farthest leaf
    get height(): number {
+	  this._level = 0;
 	  this.traverseTo(null);
 	  return this.level; 
    }

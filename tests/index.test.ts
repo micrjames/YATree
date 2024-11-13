@@ -101,8 +101,8 @@ describe("A YATree", () => {
 			   treeRootChildrenSize = treeRootChildren.size;
 			   treeRootFirstChild = treeRoot.children.next().value;
 			   treeRootLastChild = treeRoot.children.next().value;
-			   height = tree.height;
 			   level = tree.level;
+			   height = tree.height;
 			   nLevel++;nHeight++;
 			});
 			test("Should have children.", () => {
@@ -132,7 +132,7 @@ describe("A YATree", () => {
 			   expect(treeRootLastChild).toEqual(lastChild);
 			});
 			test("Should have height of one more than at the root node", () => {
-			   const childHeight = height + 1;
+			   const childHeight = height;
 			   expect(childHeight).toBe(nHeight);
 			});
 		 });
