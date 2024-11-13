@@ -7,8 +7,8 @@ describe("A YATree", () => {
 	  let nLevel: number;
 	  let nHeight: number;
 	  beforeAll(() => {
-		 nLevel = 0;
-		 nHeight = 0;
+		 nLevel = 1;
+		 nHeight = 1;
 	  });
 	  describe("With no root node", () => {
 		 let tree: YATree<number>;
@@ -51,13 +51,6 @@ describe("A YATree", () => {
 			   treeRoot = tree.root;
 			   height = tree.height;
 			   level = tree.level;
-
-			   const rootChild = treeRoot.children.next().value;
-			   do {
-				  nLevel++;
-			   } while(rootChild);
-
-			   tree.traverseTo();
 			});
 			test("Should exist.", () => {
 			   expect(tree).toBeDefined();
@@ -106,11 +99,11 @@ describe("A YATree", () => {
 			   treeRoot = tree.root;
 			   treeRootChildren = treeRoot.children;
 			   treeRootChildrenSize = treeRootChildren.size;
+			   treeRootFirstChild = treeRoot.children.next().value;
+			   treeRootLastChild = treeRoot.children.next().value;
 			   height = tree.height;
 			   level = tree.level;
 			   nLevel++;nHeight++;
-			   treeRootFirstChild = treeRootChildren.next().value;
-			   treeRootLastChild = treeRootChildren.next().value;
 			});
 			test("Should have children.", () => {
 			   expect(treeRootChildren).toBeDefined();
